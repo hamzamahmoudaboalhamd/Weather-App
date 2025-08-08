@@ -1,0 +1,41 @@
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-Black.ttf");
+  width: 300;
+}
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-BlackItalic.ttf");
+  width: 400;
+}
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-Bold.ttf");
+  width: 500;
+}
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-BoldItalic.ttf");
+  width: 600;
+}
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-ExtraBold.ttf");
+  width: 700;
+}
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-ExtraBoldItalic.ttf");
+  width: 800;
+}
+@font-face {
+  font-family: IBM;
+  src: url("/public/fonts/Roboto_Condensed-ExtraLight.ttf");
+  width: 900;
+}
+
+body {
+  background: blue;
+}
+
+/* ...existing code... */
