@@ -81,6 +81,12 @@ This project uses a free API key from OpenWeatherMap. If the limit is reached, y
 `https://api.openweathermap.org/data/2.5/weather?lat=${country.lat}&lon=${country.lon}&appid=YOUR_API_KEY`
 ```
 
+## 👤 Author
+
+* **[Hamza Mahmoud Aboalhamd](https://github.com/hamzamahmoudaboalhamd)**
+*  Linkedin: https://www.linkedin.com/in/hamza-mahmoud-10a395327/
+* Portfolio: https://hamza-mahmoud.vercel.app/
+
 ## 📄 License
 
 This project is for educational purposes.
