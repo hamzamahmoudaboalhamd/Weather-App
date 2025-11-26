@@ -6,7 +6,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 
 // MATERIAL UI COMPONENTS
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import CloudIcon from "@mui/icons-material/Cloud";
 import Button from "@mui/material/Button";
@@ -117,168 +116,101 @@ function App() {
   }, [country, locale]);
 
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
-        <Container maxWidth="sm" style={{ marginLeft: "350px" }}>
-          {/* COUNTRY SELECTOR */}
-          <div
-            style={{
-              margin: "20px 0",
-              textAlign: "center",
-            }}
-          >
-            <Select
-              value={country.name}
-              onChange={(e) => {
-                const selected = countries.find(
-                  (c) => c.name === e.target.value
-                );
-                setCountry(selected);
-              }}
-              style={{ color: "white", background: "#1c345b", borderRadius: 8 }}
-            >
-              {countries.map((c) => (
-                <MenuItem key={c.name} value={c.name}>
-                  {c.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </div>
-          {/* CONTENT CONTAINER */}
-          <div
-            style={{
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            {/* CARD */}
-            <div
-              dir={locale == "ar" ? "rtl" : "ltr"}
-              style={{
-                width: "400px",
-                background: "rgb(28 52 91 / 36%)",
-                color: "white",
-                padding: "10px",
-                borderRadius: "15px",
-                boxShadow: "0px 11px 1px rgba(0,0,0,0.05)",
-              }}
-            >
-              {/* CONTENT */}
-              <div>
-                {/* CITY & TIME */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "end",
-                    justifyContent: "start",
-                  }}
-                  dir={locale == "ar" ? "rtl" : "ltr"}
-                >
-                  <Typography
-                    variant="h2"
-                    style={{
-                      marginRight: "20px",
-                      fontWeight: "600",
-                    }}
-                  >
-                    {t(country.name)}
-                  </Typography>
-
-                  <Typography variant="h5" style={{ marginRight: "20px" }}>
-                    {dateAndTime}
-                  </Typography>
-                </div>
-                {/* == CITY & TIME == */}
-
-                <hr />
-
-                {/* CONTAINER OF DEGREE + CLOUD ICON */}
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  {/* DEGREE & DESCRIPTION */}
-                  <div>
-                    {/* TEMP */}
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Typography variant="h1" style={{ textAlign: "right" }}>
-                        {temp.number}
-                      </Typography>
-
-                      <img src={temp.icon} />
-                    </div>
-                    {/*== TEMP ==*/}
-
-                    <Typography variant="h6">{t(temp.description)}</Typography>
-
-                    {/* MIN & MAX */}
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <h5>
-                        {" "}
-                        {t("Min")}: {temp.min}
-                      </h5>
-                      <h5 style={{ margin: "0px 5px" }}>|</h5>
-                      <h5>
-                        {t("Max")}: {temp.max}
-                      </h5>
-                    </div>
-                  </div>
-                  {/*== DEGREE & DESCRIPTION ==*/}
-
-                  <CloudIcon
-                    style={{
-                      fontSize: "200px",
-                      color: "white",
-                    }}
-                  />
-                </div>
-                {/*= CONTAINER OF DEGREE + CLOUD ICON ==*/}
-              </div>
-              {/* == CONTENT == */}
-            </div>
-            {/*== CARD ==*/}
-
-            {/* TRANSLATION CONTAINER */}
-            <div
-              dir="rtl"
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "end",
-                marginTop: "20px",
-              }}
-            >
+    <>
+      <div className="app-container" dir={locale === "ar" ? "rtl" : "ltr"}>
+        <ThemeProvider theme={theme}>
+          {/* Header */}
+          <header className="header">
+            {/* Left: Language Switcher */}
+            <div className="header-left">
               <Button
-                style={{ color: "white" }}
                 variant="text"
+                className="lang-btn"
                 onClick={handleClick}
               >
-                {locale == "en" ? "Arabic" : "انجليزي"}
+                {locale === "en" ? "Arabic" : "English"}
               </Button>
             </div>
-            {/*== TRANSLATION CONTAINER ==*/}
-          </div>
-          {/*== CONTENT CONTAINER ==*/}
-        </Container>
-      </ThemeProvider>
-    </div>
+
+            {/* Center: Country Selector */}
+            <div className="header-center">
+              <Select
+                value={country.name}
+                onChange={(e) => {
+                  const selected = countries.find(
+                    (c) => c.name === e.target.value
+                  );
+                  setCountry(selected);
+                }}
+                className="country-select"
+                MenuProps={{
+                  PaperProps: {
+                    className: "dropdown-menu"
+                  },
+                }}
+              >
+                {countries.map((c) => (
+                  <MenuItem key={c.name} value={c.name}>
+                    {c.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+
+            {/* Right: Logo */}
+            <div className="header-right">
+              <h2 className="logo-text">Weather App</h2>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="main-content">
+            <div className="weather-card">
+              {/* Header: City & Date */}
+              <div className="card-header">
+                <Typography variant="h2" className="city-name">
+                  {t(country.name)}
+                </Typography>
+                <Typography variant="h6" className="date-time">
+                  {dateAndTime}
+                </Typography>
+              </div>
+
+              <hr className="divider" />
+
+              {/* Body: Temp & Icon */}
+              <div className="card-body">
+                <div className="temp-section">
+                  <div className="current-temp">
+                    <Typography variant="h1" className="temp-number">
+                      {temp.number}
+                    </Typography>
+                    {temp.icon && <img src={temp.icon} alt="weather icon" className="weather-icon" />}
+                  </div>
+                  <Typography variant="h6" className="weather-desc">
+                    {t(temp.description)}
+                  </Typography>
+
+                  <div className="min-max-container">
+                    <span className="min-max-item">
+                      {t("Min")}: {temp.min}°
+                    </span>
+                    <span className="separator">|</span>
+                    <span className="min-max-item">
+                      {t("Max")}: {temp.max}°
+                    </span>
+                  </div>
+                </div>
+
+                <div className="cloud-icon-container">
+                  <CloudIcon className="large-cloud-icon" />
+                </div>
+              </div>
+            </div>
+          </main>
+        </ThemeProvider>
+      </div>
+    </>
   );
 }
 
