@@ -79,7 +79,7 @@ function App() {
     setDateAndTime(moment().format("MMMM Do YYYY"));
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${country.lat}&lon=${country.lon}&appid=dd385f583be6c3f5b7074b6f47e1903c`,
+        `https://api.openweathermap.org/data/2.5/weather?lat=${country.lat}&lon=${country.lon}&appid=dd385f583be6c3f5b7074b6f47e1903c&lang=${locale}`,
         {
           cancelToken: new axios.CancelToken((c) => {
             cancelAxios = c;
@@ -121,15 +121,9 @@ function App() {
         <ThemeProvider theme={theme}>
           {/* Header */}
           <header className="header">
-            {/* Left: Language Switcher */}
+            {/* Left: Logo */}
             <div className="header-left">
-              <Button
-                variant="text"
-                className="lang-btn"
-                onClick={handleClick}
-              >
-                {locale === "en" ? "Arabic" : "English"}
-              </Button>
+              <h2 className="logo-text">{t("Weather App")}</h2>
             </div>
 
             {/* Center: Country Selector */}
@@ -148,18 +142,25 @@ function App() {
                     className: "dropdown-menu"
                   },
                 }}
+                renderValue={(selected) => t(selected)}
               >
                 {countries.map((c) => (
                   <MenuItem key={c.name} value={c.name}>
-                    {c.name}
+                    {t(c.name)}
                   </MenuItem>
                 ))}
               </Select>
             </div>
 
-            {/* Right: Logo */}
+            {/* Right: Language Switcher */}
             <div className="header-right">
-              <h2 className="logo-text">Weather App</h2>
+              <Button
+                variant="text"
+                className="lang-btn"
+                onClick={handleClick}
+              >
+                {locale === "en" ? "Arabic" : "English"}
+              </Button>
             </div>
           </header>
 
